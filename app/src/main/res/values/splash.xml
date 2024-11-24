@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Starting.Gombal" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground">@color/white</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/gombal_splash</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="postSplashScreenTheme">@style/Theme.Gombal</item>
+    </style>
+</resources>
