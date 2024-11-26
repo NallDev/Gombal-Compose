@@ -74,6 +74,9 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.compose.viewmodel)
+    implementation(libs.koin.compose.viewmodel.navigation)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.logging.interceptor)
 

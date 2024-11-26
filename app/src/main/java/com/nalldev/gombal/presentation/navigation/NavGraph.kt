@@ -17,15 +17,28 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.nalldev.gombal.R
+import com.nalldev.gombal.presentation.screens.onboarding.OnBoardingScreen
+import com.nalldev.gombal.presentation.screens.onboarding.OnBoardingViewModel
 import com.nalldev.gombal.utils.canGoBack
+import org.koin.compose.viewmodel.koinViewModel
 import kotlin.reflect.typeOf
 
 @Composable
-fun NavGraph(navController : NavHostController = rememberNavController(), startDestination : Screen = Screen.Home) {
+fun NavGraph(navController : NavHostController = rememberNavController(), startDestination : Screen) {
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
+        composable<Screen.OnBoarding> {
+            val viewModel = koinViewModel<OnBoardingViewModel>()
+            OnBoardingScreen(onClick = {
+                navController.navigate(Screen.Home) {
+                    popUpTo(Screen.OnBoarding) {
+                        inclusive = true
+                    }
+                }
+            }, viewModel = viewModel)
+        }
         composable<Screen.Home> {
             HomeScreen(onClick = {
                 navController.navigate(Screen.Detail(User(1, "Nall")))
@@ -49,7 +62,7 @@ fun NavGraph(navController : NavHostController = rememberNavController(), startD
 fun HomeScreen(modifier: Modifier = Modifier, onClick : () -> Unit) {
     Scaffold { innerPadding ->
         Column(modifier = modifier.fillMaxSize().padding(innerPadding).clickable(onClick = onClick), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "HOME", color = colorResource(R.color.white))
+            Text(text = "HOME", color = colorResource(R.color.gray))
         }
     }
 }
