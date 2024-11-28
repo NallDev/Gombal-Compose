@@ -5,7 +5,7 @@
     "identityHash": "e344bc0528eea3a69a4025e6742de8e5",
     "entities": [
       {
-        "tableName": "job_favorites",
+        "tableName": "job_bookmarked",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `companyName` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `remote` INTEGER NOT NULL, `tags` TEXT NOT NULL, `location` TEXT NOT NULL, `date` TEXT NOT NULL, `url` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {

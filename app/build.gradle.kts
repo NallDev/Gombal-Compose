@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.constraintlayout)
     ksp(libs.androidx.room.compiler)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)

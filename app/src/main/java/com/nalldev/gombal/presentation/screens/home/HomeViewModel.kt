@@ -97,11 +97,11 @@ class HomeViewModel(
         _searchQuery.update { query }
     }
 
-    fun updateFavoriteStatus(job: JobModel, isFavorite: Boolean) = viewModelScope.launch {
-        if (isFavorite) {
-            jobUseCases.insertJobToFavorite(job)
+    fun updateBookmarkedStatus(job: JobModel, isBookmarked: Boolean) = viewModelScope.launch {
+        if (isBookmarked) {
+            jobUseCases.insertJobToBookmarked(job)
         } else {
-            jobUseCases.deleteJobFromFavorite(job)
+            jobUseCases.deleteJobFromBookmarked(job)
         }
     }
 

@@ -16,19 +16,19 @@ class JobRepositoryImpl(
     override fun getJobs(): Flow<List<JobModel>> =
         combine(
             networkDataSource.fetchJobs(),
-            localDataSource.getFavoriteJobs()
-        ) { networkJobs, favoriteJobs ->
+            localDataSource.getBookmarkedJobs()
+        ) { networkJobs, jobBookmarks ->
             networkJobs.map { jobEntity ->
-                val isFavorite = favoriteJobs.any { it.id == jobEntity.slug }
-                JobMapper.toDomain(jobEntity).copy(isFavorite = isFavorite)
+                val isBookmarked = jobBookmarks.any { it.id == jobEntity.slug }
+                JobMapper.toDomain(jobEntity).copy(isBookmarked = isBookmarked)
             }
         }
 
-    override suspend fun insertToFavorite(job: JobModel) {
-        localDataSource.insertToFavorite(JobMapper.toJobFavoritesData(job))
+    override suspend fun insertToBookmarked(job: JobModel) {
+        localDataSource.insertToBookmarked(JobMapper.toJobBookmarkedData(job))
     }
 
-    override suspend fun deleteFromFavorite(job: JobModel) {
-        localDataSource.deleteFromFavorite(JobMapper.toJobFavoritesData(job).id)
+    override suspend fun deleteFromBookmarked(job: JobModel) {
+        localDataSource.deleteFromBookmarked(JobMapper.toJobBookmarkedData(job).id)
     }
 }

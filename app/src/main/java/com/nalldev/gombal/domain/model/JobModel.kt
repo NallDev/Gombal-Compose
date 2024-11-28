@@ -16,5 +16,5 @@ data class JobModel(
     val location : String,
     val date : String,
     val url : String,
-    var isFavorite : Boolean = false
+    var isBookmarked : Boolean = false
 )  : Parcelable

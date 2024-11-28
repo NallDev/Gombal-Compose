@@ -90,7 +90,7 @@ fun HomeScreen(
                 )
                 Spacer(modifier = modifier.width(8.dp))
                 IconButton(
-                    icon = R.drawable.ic_favorites,
+                    icon = R.drawable.ic_bookmarked,
                     color = R.color.colorPrimary,
                     onClick = navigateToBookmark
                 )
@@ -125,9 +125,9 @@ fun HomeScreen(
                             navigateToDetail.invoke(it)
                         },
                         onBookmarkClick = {
-                            viewModel.updateFavoriteStatus(it, !it.isFavorite)
+                            viewModel.updateBookmarkedStatus(it, !it.isBookmarked)
                         },
-                        isBookmarked = it.isFavorite,
+                        isBookmarked = it.isBookmarked,
                         jobTitle = it.title,
                         companyName = it.companyName,
                         location = it.location,

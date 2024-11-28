@@ -1,26 +1,20 @@
 package com.nalldev.gombal.presentation.navigation
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import android.net.Uri
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.nalldev.gombal.domain.model.JobModel
+import com.nalldev.gombal.presentation.screens.detail.DetailScreen
+import com.nalldev.gombal.presentation.screens.detail.DetailViewModel
 import com.nalldev.gombal.presentation.screens.home.HomeScreen
 import com.nalldev.gombal.presentation.screens.home.HomeViewModel
 import com.nalldev.gombal.presentation.screens.onboarding.OnBoardingScreen
 import com.nalldev.gombal.presentation.screens.onboarding.OnBoardingViewModel
-import com.nalldev.gombal.utils.canGoBack
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.reflect.typeOf
 
@@ -49,24 +43,17 @@ fun NavGraph(navController : NavHostController = rememberNavController(), startD
             }, navigateToProfile = {}, navigateToBookmark = {})
         }
         composable<Screen.Detail>(typeMap = mapOf(typeOf<JobModel>() to JobType)) {
-            val detail = it.toRoute<Screen.Detail>()
+            val viewModel = koinViewModel<DetailViewModel>()
+            val uriHandler = LocalUriHandler.current
             DetailScreen(
-                user = detail.jobModel.title,
-                onClick = {
-                    if (navController.canGoBack) {
-                        navController.navigateUp()
-                    }
+               viewModel = viewModel,
+                onBackClick = {
+                    navController.navigateUp()
+                },
+                onApplyClick = { url ->
+                    uriHandler.openUri(Uri.parse(url).toString())
                 }
             )
-        }
-    }
-}
-
-@Composable
-fun DetailScreen(modifier: Modifier = Modifier, user : String, onClick: () -> Unit) {
-    Scaffold { innerPadding ->
-        Column(modifier = modifier.fillMaxSize().padding(innerPadding).clickable(onClick = onClick), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = user)
         }
     }
 }

@@ -3,8 +3,8 @@ package com.nalldev.gombal.data.local.room.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "job_favorites")
-data class JobFavoritesEntity(
+@Entity(tableName = "job_bookmarked")
+data class JobBookmarkedEntity(
     @PrimaryKey
     val id: String,
     val companyName : String,

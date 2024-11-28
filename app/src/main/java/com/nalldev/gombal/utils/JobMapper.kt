@@ -1,6 +1,6 @@
 package com.nalldev.gombal.utils
 
-import com.nalldev.gombal.data.local.room.model.JobFavoritesEntity
+import com.nalldev.gombal.data.local.room.model.JobBookmarkedEntity
 import com.nalldev.gombal.data.network.model.DataItem
 import com.nalldev.gombal.domain.model.JobModel
 
@@ -19,8 +19,8 @@ object JobMapper {
         )
     }
 
-    fun toJobFavoritesData(job : JobModel) : JobFavoritesEntity {
-        return JobFavoritesEntity(
+    fun toJobBookmarkedData(job : JobModel) : JobBookmarkedEntity {
+        return JobBookmarkedEntity(
             id = job.id,
             companyName = job.companyName,
             title = job.title,

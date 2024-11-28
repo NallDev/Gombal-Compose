@@ -2,6 +2,7 @@ package com.nalldev.gombal.presentation.components
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,7 +27,10 @@ fun IconButton(
     ElevatedButton(
         onClick = onClick,
         modifier = modifier
-            .size(48.dp),
+            .size(48.dp)
+            .border(width = 1.dp,
+                color = colorResource(R.color.gray),
+                shape = RoundedCornerShape(12.dp)),
         contentPadding = PaddingValues(0.dp),
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.elevatedButtonColors().copy(containerColor = colorResource(R.color.colorBackground)),
@@ -43,5 +47,5 @@ fun IconButton(
 @Preview(showBackground = true)
 @Composable
 private fun IconButtonPreview() {
-    IconButton(icon = R.drawable.ic_favorites, color = R.color.colorPrimary, onClick = {})
+    IconButton(icon = R.drawable.ic_bookmarked, color = R.color.colorPrimary, onClick = {})
 }

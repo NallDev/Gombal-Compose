@@ -1,22 +1,22 @@
 package com.nalldev.gombal.data.local
 
-import com.nalldev.gombal.data.local.room.dao.JobFavoritesDao
-import com.nalldev.gombal.data.local.room.model.JobFavoritesEntity
+import com.nalldev.gombal.data.local.room.dao.JobBookmarkedDao
+import com.nalldev.gombal.data.local.room.model.JobBookmarkedEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class LocalDataSource(
-    private val jobFavoritesDao: JobFavoritesDao,
+    private val jobBookmarkedDao: JobBookmarkedDao,
     private val ioDispatcher: CoroutineDispatcher
 ) {
-    fun getFavoriteJobs() : Flow<List<JobFavoritesEntity>> = jobFavoritesDao.getJobs()
+    fun getBookmarkedJobs() : Flow<List<JobBookmarkedEntity>> = jobBookmarkedDao.getJobs()
 
-    suspend fun insertToFavorite(job: JobFavoritesEntity) = withContext(ioDispatcher) {
-        jobFavoritesDao.insertJob(job)
+    suspend fun insertToBookmarked(job: JobBookmarkedEntity) = withContext(ioDispatcher) {
+        jobBookmarkedDao.insertJob(job)
     }
 
-    suspend fun deleteFromFavorite(id: String) = withContext(ioDispatcher) {
-        jobFavoritesDao.deleteJob(id)
+    suspend fun deleteFromBookmarked(id: String) = withContext(ioDispatcher) {
+        jobBookmarkedDao.deleteJob(id)
     }
 }

@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.nalldev.gombal.data.local.room.JobDb
-import com.nalldev.gombal.data.local.room.dao.JobFavoritesDao
+import com.nalldev.gombal.data.local.room.dao.JobBookmarkedDao
 import org.koin.dsl.module
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "configuration")
@@ -21,13 +21,13 @@ fun provideDatabase(application: Application): JobDb =
         .fallbackToDestructiveMigration()
         .build()
 
-fun provideJobFavoritesDao(jobDb: JobDb): JobFavoritesDao = jobDb.jobFavoritesDao()
+fun provideJobBookmarkedDao(jobDb: JobDb): JobBookmarkedDao = jobDb.jobBookmarkedDao()
 
 fun provideDataStore(context: Context): DataStore<Preferences> = context.dataStore
 
 val localModule = module {
     single { provideDatabase(get()) }
-    single { provideJobFavoritesDao(get()) }
+    single { provideJobBookmarkedDao(get()) }
 
     single { provideDataStore(get()) }
 }
