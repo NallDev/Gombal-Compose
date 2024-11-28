@@ -21,6 +21,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "BASE_URL", "\"https://www.arbeitnow.com/api\"")
+        buildConfigField("String", "HOSTNAME", "\"arbeitnow.com\"")
     }
 
     buildTypes {
@@ -71,6 +72,7 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.runtime.livedata)
     ksp(libs.androidx.room.compiler)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)

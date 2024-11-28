@@ -21,14 +21,14 @@ import com.nalldev.gombal.R
 
 @Composable
 fun IndicatorOnBoarding(modifier: Modifier = Modifier, page: Int) {
-    val transition = updateTransition(targetState = page, label = "Indicator On Boarding")
+    val transition = updateTransition(targetState = page, label = "IndicatorOnBoarding")
     val activeWidth = 64.dp
     val inactiveWidth = 40.dp
 
     val widths = List(3) { index ->
         transition.animateDp(
             transitionSpec = { spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow) },
-            label = "Width Animation"
+            label = "WidthAnimation"
         ) { page ->
             val currentIndex = index + 1
             if (currentIndex == page) activeWidth else inactiveWidth

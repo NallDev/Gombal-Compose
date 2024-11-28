@@ -17,7 +17,7 @@ import com.nalldev.gombal.R
 
 @Composable
 fun SubtitleOnBoarding(modifier: Modifier = Modifier, page: Int) {
-    val transition = updateTransition(targetState = page, label = "Subtitles On Boarding")
+    val transition = updateTransition(targetState = page, label = "SubtitlesOnBoarding")
 
     val subtitles = listOf(
         "Find your ideal job faster and more efficiently. Our platform filters opportunities that match your skills and interests, allowing you to focus on what truly matters.",
@@ -28,7 +28,7 @@ fun SubtitleOnBoarding(modifier: Modifier = Modifier, page: Int) {
     val translationsX = subtitles.indices.map { index ->
         transition.animateFloat(
             transitionSpec = { tween(1300) },
-            label = "TranslationX Animation"
+            label = "TranslationXAnimation"
         ) { page ->
             val currentIndex = index + 1
             when {
@@ -42,7 +42,7 @@ fun SubtitleOnBoarding(modifier: Modifier = Modifier, page: Int) {
     val alphas = subtitles.indices.map { index ->
         transition.animateFloat(
             transitionSpec = { tween(1300) },
-            label = "Alpha Animation"
+            label = "AlphaAnimation"
         ) { page ->
             val currentIndex = index + 1
             if (currentIndex == page) 1f else 0f

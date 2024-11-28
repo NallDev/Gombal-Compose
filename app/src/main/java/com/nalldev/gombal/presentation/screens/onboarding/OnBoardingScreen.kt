@@ -98,6 +98,6 @@ fun OnBoardingScreen(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun OnboardingScreenPreview() {
+private fun OnboardingScreenPreview() {
     OnBoardingScreen(onClick = {}, viewModel = koinViewModel())
 }

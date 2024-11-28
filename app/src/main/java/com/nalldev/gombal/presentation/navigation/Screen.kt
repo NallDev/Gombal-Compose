@@ -1,5 +1,6 @@
 package com.nalldev.gombal.presentation.navigation
 
+import com.nalldev.gombal.domain.model.JobModel
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -11,5 +12,5 @@ sealed class Screen {
     data object Home : Screen()
 
     @Serializable
-    data class Detail(val user: User) : Screen()
+    data class Detail(val jobModel: JobModel) : Screen()
 }

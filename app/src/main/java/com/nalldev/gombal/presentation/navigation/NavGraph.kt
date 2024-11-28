@@ -10,13 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.nalldev.gombal.R
+import com.nalldev.gombal.domain.model.JobModel
+import com.nalldev.gombal.presentation.screens.home.HomeScreen
+import com.nalldev.gombal.presentation.screens.home.HomeViewModel
 import com.nalldev.gombal.presentation.screens.onboarding.OnBoardingScreen
 import com.nalldev.gombal.presentation.screens.onboarding.OnBoardingViewModel
 import com.nalldev.gombal.utils.canGoBack
@@ -40,14 +41,17 @@ fun NavGraph(navController : NavHostController = rememberNavController(), startD
             }, viewModel = viewModel)
         }
         composable<Screen.Home> {
-            HomeScreen(onClick = {
-                navController.navigate(Screen.Detail(User(1, "Nall")))
-            })
+            val viewModel = koinViewModel<HomeViewModel>()
+            HomeScreen(
+                viewModel = viewModel,
+                navigateToDetail = { jobModel ->
+                navController.navigate(Screen.Detail(jobModel))
+            }, navigateToProfile = {}, navigateToBookmark = {})
         }
-        composable<Screen.Detail>(typeMap = mapOf(typeOf<User>() to UserType)) {
+        composable<Screen.Detail>(typeMap = mapOf(typeOf<JobModel>() to JobType)) {
             val detail = it.toRoute<Screen.Detail>()
             DetailScreen(
-                user = detail.user.id,
+                user = detail.jobModel.title,
                 onClick = {
                     if (navController.canGoBack) {
                         navController.navigateUp()
@@ -59,19 +63,10 @@ fun NavGraph(navController : NavHostController = rememberNavController(), startD
 }
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, onClick : () -> Unit) {
+fun DetailScreen(modifier: Modifier = Modifier, user : String, onClick: () -> Unit) {
     Scaffold { innerPadding ->
         Column(modifier = modifier.fillMaxSize().padding(innerPadding).clickable(onClick = onClick), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "HOME", color = colorResource(R.color.gray))
-        }
-    }
-}
-
-@Composable
-fun DetailScreen(modifier: Modifier = Modifier, user : Int, onClick: () -> Unit) {
-    Scaffold { innerPadding ->
-        Column(modifier = modifier.fillMaxSize().padding(innerPadding).clickable(onClick = onClick), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = user.toString())
+            Text(text = user)
         }
     }
 }

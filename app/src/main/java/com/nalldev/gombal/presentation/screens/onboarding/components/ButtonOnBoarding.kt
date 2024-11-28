@@ -27,7 +27,7 @@ import com.nalldev.gombal.R
 
 @Composable
 fun ButtonOnBoarding(modifier: Modifier = Modifier, page: Int, onClick: () -> Unit) {
-    val transition = updateTransition(targetState = page, label = "Button On Boarding")
+    val transition = updateTransition(targetState = page, label = "ButtonOnBoarding")
 
     val width by transition.animateFloat(
         label = "ButtonWidth",

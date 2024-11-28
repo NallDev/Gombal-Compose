@@ -18,7 +18,7 @@ import com.nalldev.gombal.R
 
 @Composable
 fun ImagesOnBoarding(modifier: Modifier = Modifier, page: Int) {
-    val transition = updateTransition(targetState = page, label = "Images On Boarding")
+    val transition = updateTransition(targetState = page, label = "ImagesOnBoarding")
 
     val images = listOf(
         R.drawable.onboarding_one,
@@ -30,7 +30,7 @@ fun ImagesOnBoarding(modifier: Modifier = Modifier, page: Int) {
         val currentIndex = index + 1
         transition.animateFloat(
             transitionSpec = { tween(1300) },
-            label = "Rotation Animation"
+            label = "RotationAnimation"
         ) { page ->
             when {
                 currentIndex < page -> -90f
@@ -44,7 +44,7 @@ fun ImagesOnBoarding(modifier: Modifier = Modifier, page: Int) {
         val currentIndex = index + 1
         transition.animateFloat(
             transitionSpec = { tween(1300) },
-            label = "TranslationX Animation"
+            label = "TranslationXAnimation"
         ) { page ->
             when {
                 currentIndex < page -> -600f
@@ -58,7 +58,7 @@ fun ImagesOnBoarding(modifier: Modifier = Modifier, page: Int) {
         val currentIndex = index + 1
         transition.animateFloat(
             transitionSpec = { tween(1300) },
-            label = "TranslationY Animation"
+            label = "TranslationYAnimation"
         ) { page ->
             when {
                 currentIndex < page -> 800f
@@ -72,7 +72,7 @@ fun ImagesOnBoarding(modifier: Modifier = Modifier, page: Int) {
         val currentIndex = index + 1
         transition.animateFloat(
             transitionSpec = { tween(1300) },
-            label = "Alpha Animation"
+            label = "AlphaAnimation"
         ) { page ->
             if (currentIndex == page) 1f else 0f
         }
