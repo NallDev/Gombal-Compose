@@ -41,8 +41,8 @@ class HomeViewModel(
     var jobs by mutableStateOf<List<JobModel>>(emptyList())
         private set
 
-    private val _loading : MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val loading : StateFlow<Boolean> = _loading.onStart { fetchJobs() }.stateIn(
+    private val _loading: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val loading: StateFlow<Boolean> = _loading.onStart { fetchJobs() }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000L),
         initialValue = false

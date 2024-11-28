@@ -3,7 +3,6 @@ package com.nalldev.gombal.presentation.screens.onboarding.components
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,10 +54,14 @@ fun SubtitleOnBoarding(modifier: Modifier = Modifier, page: Int) {
             fontSize = 14.sp,
             color = colorResource(R.color.subtitle),
             modifier = modifier
-                .offset { IntOffset(
-                    x = translationsX[index].value.dp.toPx().toInt(),
-                    y = 0
-                )}
+                .offset {
+                    IntOffset(
+                        x = translationsX[index].value.dp
+                            .toPx()
+                            .toInt(),
+                        y = 0
+                    )
+                }
                 .alpha(alphas[index].value)
         )
     }

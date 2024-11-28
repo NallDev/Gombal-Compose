@@ -27,7 +27,12 @@ fun IndicatorOnBoarding(modifier: Modifier = Modifier, page: Int) {
 
     val widths = List(3) { index ->
         transition.animateDp(
-            transitionSpec = { spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow) },
+            transitionSpec = {
+                spring(
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    stiffness = Spring.StiffnessLow
+                )
+            },
             label = "WidthAnimation"
         ) { page ->
             val currentIndex = index + 1

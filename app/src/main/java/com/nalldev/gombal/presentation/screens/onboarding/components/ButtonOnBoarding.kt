@@ -32,8 +32,8 @@ fun ButtonOnBoarding(modifier: Modifier = Modifier, page: Int, onClick: () -> Un
     val width by transition.animateFloat(
         label = "ButtonWidth",
         transitionSpec = { tween(durationMillis = 800) }
-    ) { page ->
-        if (page == 3) {
+    ) {
+        if (it == 3) {
             1.0f
         } else {
             0.4f

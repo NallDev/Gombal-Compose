@@ -19,7 +19,17 @@ class Gombal : Application() {
         startKoin {
             androidLogger(Level.INFO)
             androidContext(this@Gombal)
-            modules(listOf(commonModule, localModule, networkModule, dataSourceModule, repositoryModule, useCaseModule, viewModelModule))
+            modules(
+                listOf(
+                    commonModule,
+                    localModule,
+                    networkModule,
+                    dataSourceModule,
+                    repositoryModule,
+                    useCaseModule,
+                    viewModelModule
+                )
+            )
         }
     }
 }

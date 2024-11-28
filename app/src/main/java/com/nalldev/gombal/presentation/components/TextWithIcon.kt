@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.nalldev.gombal.R
 
 @Composable
-fun TextWithIcon(modifier: Modifier = Modifier, imageVector: ImageVector, text : String) {
+fun TextWithIcon(modifier: Modifier = Modifier, imageVector: ImageVector, text: String) {
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(
             imageVector = imageVector,

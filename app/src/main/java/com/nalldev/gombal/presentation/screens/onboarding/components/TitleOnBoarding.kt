@@ -23,7 +23,7 @@ fun TitleOnBoarding(modifier: Modifier = Modifier, page: Int) {
     val maxDurationMillis = 500L
 
     val text = remember { mutableStateOf("") }
-    val currentTitle = titles[page-1]
+    val currentTitle = titles[page - 1]
     val showCursor = remember { mutableStateOf(true) }
 
     val delayPerChar = maxDurationMillis / currentTitle.length

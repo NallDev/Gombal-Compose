@@ -114,7 +114,10 @@ fun HomeScreen(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(text = "No Jobs Found")
+                        Text(
+                            text = "No Jobs Found",
+                            color = colorResource(R.color.colorOnBackground)
+                        )
                     }
                 }
             } else {

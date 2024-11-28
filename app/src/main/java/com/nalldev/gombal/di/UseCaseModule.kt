@@ -1,5 +1,7 @@
 package com.nalldev.gombal.di
 
+import com.nalldev.gombal.domain.usecases.bookmark.BookmarkedUseCases
+import com.nalldev.gombal.domain.usecases.bookmark.GetBookmarkedJobs
 import com.nalldev.gombal.domain.usecases.dark_mode.DarkModeUseCases
 import com.nalldev.gombal.domain.usecases.dark_mode.IsDarkMode
 import com.nalldev.gombal.domain.usecases.dark_mode.SetDarkMode
@@ -25,4 +27,7 @@ val useCaseModule = module {
     single { InsertJobToBookmarked(get()) }
     single { DeleteJobFromBookmarked(get()) }
     single { JobUseCases(get(), get(), get()) }
+
+    single { GetBookmarkedJobs(get()) }
+    single { BookmarkedUseCases(get(), get()) }
 }

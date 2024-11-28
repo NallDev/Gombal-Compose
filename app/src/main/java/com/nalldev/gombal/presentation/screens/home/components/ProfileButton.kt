@@ -19,10 +19,13 @@ import com.nalldev.gombal.R
 
 @Composable
 fun ProfileButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
-    Row(modifier = modifier.clickable(onClick = onClick), verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        modifier = modifier.clickable(onClick = onClick),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Icon(
             imageVector = Icons.Outlined.AccountCircle,
-            contentDescription = null,
+            contentDescription = "about_page",
             tint = colorResource(
                 R.color.colorOnBackground
             )

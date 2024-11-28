@@ -87,8 +87,12 @@ fun ImagesOnBoarding(modifier: Modifier = Modifier, page: Int) {
                 .padding(horizontal = 24.dp)
                 .offset {
                     IntOffset(
-                        x = translationsX[index].value.dp.toPx().toInt(),
-                        y = translationsY[index].value.dp.toPx().toInt()
+                        x = translationsX[index].value.dp
+                            .toPx()
+                            .toInt(),
+                        y = translationsY[index].value.dp
+                            .toPx()
+                            .toInt()
                     )
                 }
                 .rotate(rotations[index].value)

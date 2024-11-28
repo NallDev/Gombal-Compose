@@ -28,13 +28,16 @@ fun IconButton(
         onClick = onClick,
         modifier = modifier
             .size(48.dp)
-            .border(width = 1.dp,
+            .border(
+                width = 1.dp,
                 color = colorResource(R.color.gray),
-                shape = RoundedCornerShape(12.dp)),
+                shape = RoundedCornerShape(12.dp)
+            ),
         contentPadding = PaddingValues(0.dp),
         shape = RoundedCornerShape(12.dp),
-        colors = ButtonDefaults.elevatedButtonColors().copy(containerColor = colorResource(R.color.colorBackground)),
-    ){
+        colors = ButtonDefaults.elevatedButtonColors()
+            .copy(containerColor = colorResource(R.color.colorBackground)),
+    ) {
         Icon(
             painter = painterResource(icon),
             contentDescription = null,

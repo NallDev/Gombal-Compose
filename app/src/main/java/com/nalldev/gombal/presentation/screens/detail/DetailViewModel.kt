@@ -25,7 +25,7 @@ class DetailViewModel(
     var isBookmarked by mutableStateOf(jobModel.isBookmarked)
         private set
 
-    fun updateFavoriteStatus(job: JobModel, isBookmarked: Boolean) = viewModelScope.launch {
+    fun updateBookmarkedStatus(job: JobModel, isBookmarked: Boolean) = viewModelScope.launch {
         if (isBookmarked) {
             jobUseCases.insertJobToBookmarked(job)
             this@DetailViewModel.isBookmarked = true

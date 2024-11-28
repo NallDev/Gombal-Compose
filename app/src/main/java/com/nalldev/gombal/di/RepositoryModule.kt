@@ -1,8 +1,10 @@
 package com.nalldev.gombal.di
 
+import com.nalldev.gombal.data.repositories.BookmarkRepositoryImpl
 import com.nalldev.gombal.data.repositories.DarkModeRepositoryImpl
 import com.nalldev.gombal.data.repositories.JobRepositoryImpl
 import com.nalldev.gombal.data.repositories.OnBoardingRepositoryImpl
+import com.nalldev.gombal.domain.repositories.BookmarkRepository
 import com.nalldev.gombal.domain.repositories.DarkModeRepository
 import com.nalldev.gombal.domain.repositories.JobRepository
 import com.nalldev.gombal.domain.repositories.OnBoardingRepository
@@ -16,4 +18,5 @@ val repositoryModule = module {
         )
     }
     single <JobRepository>{ JobRepositoryImpl(get(), get()) }
+    single <BookmarkRepository>{ BookmarkRepositoryImpl(get()) }
 }

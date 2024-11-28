@@ -5,8 +5,8 @@ import com.nalldev.gombal.data.network.model.DataItem
 import com.nalldev.gombal.domain.model.JobModel
 
 object JobMapper {
-    fun toDomain(data: DataItem) : JobModel {
-        return JobModel (
+    fun toDomain(data: DataItem): JobModel {
+        return JobModel(
             id = data.slug,
             companyName = data.companyName ?: "Unknown",
             title = data.title,
@@ -19,7 +19,20 @@ object JobMapper {
         )
     }
 
-    fun toJobBookmarkedData(job : JobModel) : JobBookmarkedEntity {
+    fun localToDomain(entity: JobBookmarkedEntity) = JobModel(
+        id = entity.id,
+        companyName = entity.companyName,
+        title = entity.title,
+        url = entity.url,
+        description = entity.description,
+        tags = entity.tags,
+        remote = entity.remote,
+        location = entity.location,
+        date = entity.date,
+        isBookmarked = true
+    )
+
+    fun toJobBookmarkedData(job: JobModel): JobBookmarkedEntity {
         return JobBookmarkedEntity(
             id = job.id,
             companyName = job.companyName,

@@ -13,4 +13,10 @@ sealed class Screen {
 
     @Serializable
     data class Detail(val jobModel: JobModel) : Screen()
+
+    @Serializable
+    data object Bookmark : Screen()
+
+    @Serializable
+    data object About : Screen()
 }

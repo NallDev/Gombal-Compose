@@ -14,6 +14,7 @@ val JobType = object : NavType<JobModel>(
     override fun put(bundle: Bundle, key: String, value: JobModel) {
         bundle.putParcelable(key, value)
     }
+
     override fun get(bundle: Bundle, key: String): JobModel {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             bundle.getParcelable(key, JobModel::class.java) as JobModel

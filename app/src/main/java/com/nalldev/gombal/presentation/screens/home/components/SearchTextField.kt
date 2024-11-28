@@ -43,7 +43,10 @@ fun SearchTextField(modifier: Modifier = Modifier, onValueChange: (String) -> Un
                 shape = RoundedCornerShape(12.dp)
             )
             .padding(horizontal = 16.dp),
-        textStyle = TextStyle.Default.copy(fontSize = 12.sp, color = colorResource(R.color.colorOnBackground)),
+        textStyle = TextStyle.Default.copy(
+            fontSize = 12.sp,
+            color = colorResource(R.color.colorOnBackground)
+        ),
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
@@ -59,7 +62,7 @@ fun SearchTextField(modifier: Modifier = Modifier, onValueChange: (String) -> Un
                     tint = colorResource(R.color.subtitle)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Box(contentAlignment = Alignment.CenterStart,) {
+                Box(contentAlignment = Alignment.CenterStart) {
                     if (value.isEmpty()) {
                         Text(
                             text = "Search job",

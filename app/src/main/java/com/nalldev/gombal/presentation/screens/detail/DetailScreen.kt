@@ -93,7 +93,12 @@ fun DetailScreen(
                         modifier = modifier
                             .size(24.dp)
                             .padding(top = 4.dp)
-                            .clickable(onClick = { viewModel.updateFavoriteStatus(jobModel, !viewModel.isBookmarked) }),
+                            .clickable(onClick = {
+                                viewModel.updateBookmarkedStatus(
+                                    jobModel,
+                                    !viewModel.isBookmarked
+                                )
+                            }),
                         contentDescription = null,
                         painter = painterResource(if (viewModel.isBookmarked) R.drawable.ic_bookmarked_filled else R.drawable.ic_bookmarked),
                         tint = colorResource(R.color.colorPrimary)
@@ -126,14 +131,14 @@ fun DetailScreen(
                             colorResource(R.color.colorBackground80),
                             colorResource(R.color.colorBackground20)
                         ),
-                        start = Offset(0f, Float.POSITIVE_INFINITY ),
+                        start = Offset(0f, Float.POSITIVE_INFINITY),
                         end = Offset(0f, 0f)
                     )
                 )
                 .align(Alignment.BottomCenter)
         ) {
             Button(
-                onClick = {onApplyClick.invoke(jobModel.url)},
+                onClick = { onApplyClick.invoke(jobModel.url) },
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.colorPrimary)),
                 shape = RoundedCornerShape(12.dp),
                 modifier = modifier
