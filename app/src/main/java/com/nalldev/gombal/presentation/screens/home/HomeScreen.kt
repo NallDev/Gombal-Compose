@@ -19,7 +19,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,8 +46,8 @@ fun HomeScreen(
     navigateToBookmark: () -> Unit
 ) {
     val context = LocalContext.current
-    val isLoading by viewModel.loading.collectAsState()
-    val searchQuery by viewModel.searchQuery.collectAsState()
+    val isLoading by viewModel.loading.collectAsStateWithLifecycle()
+    val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     val jobs = viewModel.jobs
     val toastEvent = viewModel.toastEvent
 

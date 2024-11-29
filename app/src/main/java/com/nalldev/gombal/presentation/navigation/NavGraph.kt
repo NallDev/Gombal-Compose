@@ -18,6 +18,7 @@ import com.nalldev.gombal.presentation.screens.home.HomeScreen
 import com.nalldev.gombal.presentation.screens.home.HomeViewModel
 import com.nalldev.gombal.presentation.screens.onboarding.OnBoardingScreen
 import com.nalldev.gombal.presentation.screens.onboarding.OnBoardingViewModel
+import com.nalldev.gombal.utils.canGoBack
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.reflect.typeOf
 
@@ -73,7 +74,9 @@ fun NavGraph(
             DetailScreen(
                 viewModel = viewModel,
                 onBackClick = {
-                    navController.navigateUp()
+                    if (navController.canGoBack) {
+                        navController.navigateUp()
+                    }
                 },
                 onApplyClick = { url ->
                     uriHandler.openUri(Uri.parse(url).toString())
@@ -86,7 +89,9 @@ fun NavGraph(
             BookmarkScreen(
                 viewModel = viewModel,
                 onBackClick = {
-                    navController.navigateUp()
+                    if (navController.canGoBack) {
+                        navController.navigateUp()
+                    }
                 },
                 navigateToDetail = { jobModel ->
                     navController.navigate(Screen.Detail(jobModel), navOptions = navOptions {
@@ -99,7 +104,9 @@ fun NavGraph(
         composable<Screen.About> {
             AboutScreen(
                 onBackClick = {
-                    navController.navigateUp()
+                    if (navController.canGoBack) {
+                        navController.navigateUp()
+                    }
                 },
                 isDarkMode = isDarkMode
             )

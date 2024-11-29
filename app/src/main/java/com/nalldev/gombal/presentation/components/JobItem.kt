@@ -17,11 +17,13 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -66,101 +68,101 @@ fun JobItem(
         label = "subtitle"
     )
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .background(
-                color = colorBackground, shape = RoundedCornerShape(12.dp)
-            )
-            .border(
-                width = 1.dp,
-                color = gray,
-                shape = RoundedCornerShape(12.dp)
-            )
-            .clickable(onClick = onContainerClick)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        ConstraintLayout(modifier = modifier.fillMaxWidth()) {
-            val (image, column, icon) = createRefs()
-
-            Image(
-                painter = painterResource(R.drawable.ic_kotlin),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(48.dp)
-                    .constrainAs(image) {
-                        start.linkTo(parent.start)
-                        top.linkTo(parent.top)
-                    }
-            )
-
-            Column(
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-                modifier = Modifier
-                    .constrainAs(column) {
-                        start.linkTo(image.end, margin = 8.dp)
-                        top.linkTo(parent.top, margin = 4.dp)
-                        end.linkTo(icon.start, margin = 8.dp)
-                        width = androidx.constraintlayout.compose.Dimension.fillToConstraints
-                    }
-            ) {
-                Text(
-                    text = jobTitle,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = colorOnBackground,
+    Card(modifier = modifier.clip(RoundedCornerShape(12.dp))) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .background(color = colorBackground)
+                .border(
+                    width = 1.dp,
+                    color = gray,
+                    shape = RoundedCornerShape(12.dp)
                 )
-                Text(
-                    text = companyName,
-                    fontSize = 12.sp,
-                    color = subtitle,
-                )
-            }
+                .clickable(onClick = onContainerClick)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            ConstraintLayout(modifier = modifier.fillMaxWidth()) {
+                val (image, column, icon) = createRefs()
 
-            Icon(
-                painter = painterResource(if (isBookmarked) R.drawable.ic_bookmarked_filled else R.drawable.ic_bookmarked),
-                contentDescription = null,
-                tint = colorPrimary,
-                modifier = Modifier
-                    .size(24.dp)
-                    .padding(top = 4.dp)
-                    .clickable(onClick = onBookmarkClick)
-                    .constrainAs(icon) {
-                        end.linkTo(parent.end)
-                        top.linkTo(parent.top)
-                    }
-            )
-        }
-        if (tags.isNotEmpty()) {
-            FlowRow(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                tags.forEach { tag ->
+                Image(
+                    painter = painterResource(R.drawable.ic_kotlin),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .constrainAs(image) {
+                            start.linkTo(parent.start)
+                            top.linkTo(parent.top)
+                        }
+                )
+
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    modifier = Modifier
+                        .constrainAs(column) {
+                            start.linkTo(image.end, margin = 8.dp)
+                            top.linkTo(parent.top, margin = 4.dp)
+                            end.linkTo(icon.start, margin = 8.dp)
+                            width = androidx.constraintlayout.compose.Dimension.fillToConstraints
+                        }
+                ) {
                     Text(
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .background(
-                                color = colorPrimary,
-                                shape = RoundedCornerShape(8.dp)
-                            )
-                            .padding(8.dp),
-                        text = tag,
-                        color = Color.White,
+                        text = jobTitle,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = colorOnBackground,
+                    )
+                    Text(
+                        text = companyName,
+                        fontSize = 12.sp,
+                        color = subtitle,
                     )
                 }
-            }
-        }
 
-        TextWithIcon(
-            modifier = modifier.fillMaxWidth(),
-            imageVector = Icons.Outlined.LocationOn,
-            text = location,
-            isDarkMode = isDarkMode
-        )
+                Icon(
+                    painter = painterResource(if (isBookmarked) R.drawable.ic_bookmarked_filled else R.drawable.ic_bookmarked),
+                    contentDescription = null,
+                    tint = colorPrimary,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .padding(top = 4.dp)
+                        .clickable(onClick = onBookmarkClick)
+                        .constrainAs(icon) {
+                            end.linkTo(parent.end)
+                            top.linkTo(parent.top)
+                        }
+                )
+            }
+            if (tags.isNotEmpty()) {
+                FlowRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    tags.forEach { tag ->
+                        Text(
+                            modifier = Modifier
+                                .wrapContentSize()
+                                .background(
+                                    color = colorPrimary,
+                                    shape = RoundedCornerShape(8.dp)
+                                )
+                                .padding(8.dp),
+                            text = tag,
+                            color = Color.White,
+                        )
+                    }
+                }
+            }
+
+            TextWithIcon(
+                modifier = modifier.fillMaxWidth(),
+                imageVector = Icons.Outlined.LocationOn,
+                text = location,
+                isDarkMode = isDarkMode
+            )
+        }
     }
 }
 

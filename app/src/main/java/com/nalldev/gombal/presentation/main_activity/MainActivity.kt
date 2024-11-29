@@ -6,9 +6,9 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nalldev.gombal.R
 import com.nalldev.gombal.presentation.navigation.NavGraph
 import com.nalldev.gombal.presentation.navigation.Screen
@@ -27,8 +27,8 @@ class MainActivity : ComponentActivity() {
         installSplashScreen.setKeepOnScreenCondition(condition = { true })
 
         setContent {
-            val isDarkMode by viewModel.isDarkMode.collectAsState()
-            val isOnBoardingFinished by viewModel.isOnBoardingFinished.collectAsState()
+            val isDarkMode by viewModel.isDarkMode.collectAsStateWithLifecycle()
+            val isOnBoardingFinished by viewModel.isOnBoardingFinished.collectAsStateWithLifecycle()
 
             LaunchedEffect(isDarkMode) {
                 enableEdgeToEdge(statusBarStyle = SystemBarStyle.auto(
