@@ -32,19 +32,13 @@ class HomeViewModel(
     private val jobUseCases: JobUseCases,
     private val darkModeUseCases: DarkModeUseCases,
 ) : ViewModel() {
-    val isDarkMode = darkModeUseCases.isDarkMode().stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(500L),
-        initialValue = false
-    )
-
     var jobs by mutableStateOf<List<JobModel>>(emptyList())
         private set
 
     private val _loading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val loading: StateFlow<Boolean> = _loading.onStart { fetchJobs() }.stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000L),
+        started = SharingStarted.Lazily,
         initialValue = false
     )
 

@@ -1,4 +1,4 @@
-package com.nalldev.gombal.data.network
+package com.nalldev.gombal.data.network.api
 
 import com.nalldev.gombal.BuildConfig
 import io.ktor.client.HttpClient

@@ -17,20 +17,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nalldev.gombal.R
 import com.nalldev.gombal.presentation.components.IconButton
+import com.nalldev.gombal.ui.theme.CustomColorTheme
 
 @Composable
-fun AboutScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
+fun AboutScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit, isDarkMode: Boolean) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(R.color.colorBackground))
+            .background(color = CustomColorTheme.colorBackground(isDarkMode))
             .padding(horizontal = 16.dp)
             .systemBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -44,12 +44,12 @@ fun AboutScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
             IconButton(
                 modifier = modifier,
                 icon = R.drawable.ic_back,
-                color = R.color.colorPrimary,
+                isDarkMode = isDarkMode,
                 onClick = onBackClick
             )
             Text(
                 text = "About",
-                color = colorResource(R.color.colorOnBackground),
+                color = CustomColorTheme.colorOnBackground(isDarkMode),
                 fontWeight = FontWeight.Medium,
                 fontSize = 16.sp
             )
@@ -68,12 +68,12 @@ fun AboutScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
             text = "Naldi Aja",
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
-            color = colorResource(R.color.colorOnBackground)
+            color = CustomColorTheme.colorOnBackground(isDarkMode)
         )
         Text(
             text = "afrinaldi.genz0@gmail.com",
             fontSize = 12.sp,
-            color = colorResource(R.color.colorOnBackground)
+            color = CustomColorTheme.colorOnBackground(isDarkMode)
         )
     }
 }

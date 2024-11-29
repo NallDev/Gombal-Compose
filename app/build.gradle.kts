@@ -82,6 +82,7 @@ dependencies {
     implementation(libs.koin.compose.viewmodel.navigation)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.logging.interceptor)
+    implementation(libs.accompanist.systemuicontroller)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

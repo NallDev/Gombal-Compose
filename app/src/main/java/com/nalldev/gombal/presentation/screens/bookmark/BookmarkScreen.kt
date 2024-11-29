@@ -20,7 +20,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,13 +28,15 @@ import com.nalldev.gombal.R
 import com.nalldev.gombal.domain.model.JobModel
 import com.nalldev.gombal.presentation.components.IconButton
 import com.nalldev.gombal.presentation.components.JobItem
+import com.nalldev.gombal.ui.theme.CustomColorTheme
 
 @Composable
 fun BookmarkScreen(
     modifier: Modifier = Modifier,
     viewModel: BookmarkViewModel,
     onBackClick: () -> Unit,
-    navigateToDetail: (JobModel) -> Unit
+    navigateToDetail: (JobModel) -> Unit,
+    isDarkMode: Boolean
 ) {
     val bookmarkedJobs by viewModel.bookmarkedJobs.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -51,7 +52,7 @@ fun BookmarkScreen(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(R.color.colorBackground))
+            .background(color = CustomColorTheme.colorBackground(isDarkMode))
             .padding(horizontal = 16.dp)
             .systemBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -66,12 +67,12 @@ fun BookmarkScreen(
                 IconButton(
                     modifier = modifier,
                     icon = R.drawable.ic_back,
-                    color = R.color.colorPrimary,
+                    isDarkMode = isDarkMode,
                     onClick = onBackClick
                 )
                 Text(
                     text = "Bookmarked",
-                    color = colorResource(R.color.colorOnBackground),
+                    color = CustomColorTheme.colorOnBackground(isDarkMode),
                     fontWeight = FontWeight.Medium,
                     fontSize = 16.sp
                 )
@@ -86,7 +87,7 @@ fun BookmarkScreen(
                 ) {
                     Text(
                         text = "There is no bookmarked job",
-                        color = colorResource(R.color.colorOnBackground)
+                        color = CustomColorTheme.colorOnBackground(isDarkMode)
                     )
                 }
             }
@@ -104,7 +105,8 @@ fun BookmarkScreen(
                     jobTitle = it.title,
                     companyName = it.companyName,
                     location = it.location,
-                    tags = it.tags
+                    tags = it.tags,
+                    isDarkMode = isDarkMode
                 )
             }
         }

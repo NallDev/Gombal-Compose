@@ -1,7 +1,7 @@
 package com.nalldev.gombal.di
 
 import com.nalldev.gombal.BuildConfig
-import com.nalldev.gombal.data.network.ApiServices
+import com.nalldev.gombal.data.network.api.ApiServices
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation

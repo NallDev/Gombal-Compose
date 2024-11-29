@@ -36,6 +36,6 @@ class OnBoardingViewModel(private val onBoardingUseCases: OnBoardingUseCases) : 
     }
 
     fun setOnBoardingFinished() = viewModelScope.launch {
-        onBoardingUseCases.setOnBoardingFinished(true)
+        onBoardingUseCases.setOnBoardingFinished(false)
     }
 }

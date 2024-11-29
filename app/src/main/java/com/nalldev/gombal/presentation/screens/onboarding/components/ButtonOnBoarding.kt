@@ -20,13 +20,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.nalldev.gombal.R
+import com.nalldev.gombal.ui.theme.CustomColorTheme
 
 @Composable
-fun ButtonOnBoarding(modifier: Modifier = Modifier, page: Int, onClick: () -> Unit) {
+fun ButtonOnBoarding(modifier: Modifier = Modifier, page: Int, onClick: () -> Unit, isDarkMode : Boolean) {
     val transition = updateTransition(targetState = page, label = "ButtonOnBoarding")
 
     val width by transition.animateFloat(
@@ -42,7 +41,7 @@ fun ButtonOnBoarding(modifier: Modifier = Modifier, page: Int, onClick: () -> Un
 
     Button(
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.colorPrimary)),
+        colors = ButtonDefaults.buttonColors(containerColor = CustomColorTheme.colorPrimary(isDarkMode)),
         shape = RoundedCornerShape(12.dp),
         modifier = modifier
             .height(48.dp)

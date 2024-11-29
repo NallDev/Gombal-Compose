@@ -8,14 +8,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.nalldev.gombal.R
+import com.nalldev.gombal.ui.theme.CustomColorTheme
 
 @Composable
-fun SubtitleOnBoarding(modifier: Modifier = Modifier, page: Int) {
+fun SubtitleOnBoarding(modifier: Modifier = Modifier, page: Int, isDarkMode: Boolean) {
     val transition = updateTransition(targetState = page, label = "SubtitlesOnBoarding")
 
     val subtitles = listOf(
@@ -52,7 +51,7 @@ fun SubtitleOnBoarding(modifier: Modifier = Modifier, page: Int) {
         Text(
             text = subtitle,
             fontSize = 14.sp,
-            color = colorResource(R.color.subtitle),
+            color = CustomColorTheme.subtitle(isDarkMode),
             modifier = modifier
                 .offset {
                     IntOffset(

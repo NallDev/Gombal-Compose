@@ -27,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,13 +35,15 @@ import com.nalldev.gombal.R
 import com.nalldev.gombal.presentation.components.IconButton
 import com.nalldev.gombal.presentation.components.TextWithIcon
 import com.nalldev.gombal.presentation.screens.detail.components.HtmlText
+import com.nalldev.gombal.ui.theme.CustomColorTheme
 
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel,
     onBackClick: () -> Unit,
-    onApplyClick: (String) -> Unit
+    onApplyClick: (String) -> Unit,
+    isDarkMode : Boolean
 ) {
 
     val jobModel = viewModel.jobModel
@@ -50,7 +51,7 @@ fun DetailScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(color = colorResource(R.color.colorBackground))
+            .background(color = CustomColorTheme.colorBackground(isDarkMode))
             .systemBarsPadding()
     ) {
         LazyColumn(
@@ -69,12 +70,12 @@ fun DetailScreen(
                     IconButton(
                         modifier = modifier,
                         icon = R.drawable.ic_back,
-                        color = R.color.colorPrimary,
+                        isDarkMode = isDarkMode,
                         onClick = onBackClick
                     )
                     Text(
                         text = "Detail",
-                        color = colorResource(R.color.colorOnBackground),
+                        color = CustomColorTheme.colorOnBackground(isDarkMode),
                         fontWeight = FontWeight.Medium,
                         fontSize = 16.sp
                     )
@@ -86,7 +87,7 @@ fun DetailScreen(
                     Text(
                         modifier = Modifier.weight(1f),
                         text = jobModel.title,
-                        color = colorResource(R.color.colorOnBackground),
+                        color = CustomColorTheme.colorOnBackground(isDarkMode),
                         fontSize = 20.sp
                     )
                     Icon(
@@ -101,22 +102,22 @@ fun DetailScreen(
                             }),
                         contentDescription = null,
                         painter = painterResource(if (viewModel.isBookmarked) R.drawable.ic_bookmarked_filled else R.drawable.ic_bookmarked),
-                        tint = colorResource(R.color.colorPrimary)
+                        tint = CustomColorTheme.colorPrimary(isDarkMode)
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                TextWithIcon(imageVector = Icons.Outlined.Home, text = jobModel.companyName)
-                TextWithIcon(imageVector = Icons.Outlined.LocationOn, text = jobModel.location)
+                TextWithIcon(imageVector = Icons.Outlined.Home, text = jobModel.companyName, isDarkMode = isDarkMode)
+                TextWithIcon(imageVector = Icons.Outlined.LocationOn, text = jobModel.location, isDarkMode = isDarkMode)
             }
             item {
                 Text(
                     text = "Description",
-                    color = colorResource(R.color.colorOnBackground),
+                    color = CustomColorTheme.colorOnBackground(isDarkMode),
                     fontWeight = FontWeight.Medium,
                     fontSize = 16.sp
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                HtmlText(text = jobModel.description)
+                HtmlText(text = jobModel.description, isDarkMode = isDarkMode)
                 Spacer(modifier = Modifier.height(80.dp))
             }
         }
@@ -127,9 +128,9 @@ fun DetailScreen(
                 .background(
                     brush = Brush.linearGradient(
                         colors = listOf(
-                            colorResource(R.color.colorBackground),
-                            colorResource(R.color.colorBackground80),
-                            colorResource(R.color.colorBackground20)
+                            CustomColorTheme.colorBackground(isDarkMode),
+                            CustomColorTheme.colorBackground80(isDarkMode),
+                            CustomColorTheme.colorBackground20(isDarkMode)
                         ),
                         start = Offset(0f, Float.POSITIVE_INFINITY),
                         end = Offset(0f, 0f)
@@ -139,7 +140,7 @@ fun DetailScreen(
         ) {
             Button(
                 onClick = { onApplyClick.invoke(jobModel.url) },
-                colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.colorPrimary)),
+                colors = ButtonDefaults.buttonColors(containerColor = CustomColorTheme.colorPrimary(isDarkMode)),
                 shape = RoundedCornerShape(12.dp),
                 modifier = modifier
                     .height(48.dp)

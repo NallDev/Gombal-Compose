@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import com.nalldev.gombal.domain.model.JobModel
 import com.nalldev.gombal.presentation.screens.about.AboutScreen
 import com.nalldev.gombal.presentation.screens.bookmark.BookmarkScreen
@@ -21,31 +22,48 @@ import org.koin.compose.viewmodel.koinViewModel
 import kotlin.reflect.typeOf
 
 @Composable
-fun NavGraph(navController: NavHostController = rememberNavController(), startDestination: Screen) {
+fun NavGraph(
+    navController: NavHostController = rememberNavController(),
+    startDestination: Screen,
+    isDarkMode: Boolean
+) {
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
         composable<Screen.OnBoarding> {
             val viewModel = koinViewModel<OnBoardingViewModel>()
-            OnBoardingScreen(onClick = {
-                navController.navigate(Screen.Home) {
-                    popUpTo(Screen.OnBoarding) {
-                        inclusive = true
+            OnBoardingScreen(
+                onClick = {
+                    navController.navigate(Screen.Home) {
+                        launchSingleTop = true
+                        popUpTo(Screen.OnBoarding) {
+                            inclusive = true
+                        }
                     }
-                }
-            }, viewModel = viewModel)
+                }, viewModel = viewModel,
+                isDarkMode = isDarkMode
+            )
         }
         composable<Screen.Home> {
             val viewModel = koinViewModel<HomeViewModel>()
             HomeScreen(
                 viewModel = viewModel,
+                isDarkMode = isDarkMode,
                 navigateToDetail = { jobModel ->
-                    navController.navigate(Screen.Detail(jobModel))
+                    navController.navigate(
+                        route = Screen.Detail(jobModel),
+                        navOptions = navOptions {
+                            launchSingleTop = true
+                        })
                 }, navigateToProfile = {
-                    navController.navigate(Screen.About)
+                    navController.navigate(route = Screen.About, navOptions = navOptions {
+                        launchSingleTop = true
+                    })
                 }, navigateToBookmark = {
-                    navController.navigate(Screen.Bookmark)
+                    navController.navigate(route = Screen.Bookmark, navOptions = navOptions {
+                        launchSingleTop = true
+                    })
                 }
             )
         }
@@ -59,7 +77,8 @@ fun NavGraph(navController: NavHostController = rememberNavController(), startDe
                 },
                 onApplyClick = { url ->
                     uriHandler.openUri(Uri.parse(url).toString())
-                }
+                },
+                isDarkMode = isDarkMode
             )
         }
         composable<Screen.Bookmark> {
@@ -70,15 +89,19 @@ fun NavGraph(navController: NavHostController = rememberNavController(), startDe
                     navController.navigateUp()
                 },
                 navigateToDetail = { jobModel ->
-                    navController.navigate(Screen.Detail(jobModel))
-                }
+                    navController.navigate(Screen.Detail(jobModel), navOptions = navOptions {
+                        launchSingleTop = true
+                    })
+                },
+                isDarkMode = isDarkMode
             )
         }
         composable<Screen.About> {
             AboutScreen(
                 onBackClick = {
                     navController.navigateUp()
-                }
+                },
+                isDarkMode = isDarkMode
             )
         }
     }

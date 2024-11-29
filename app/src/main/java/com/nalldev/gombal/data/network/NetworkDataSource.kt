@@ -1,5 +1,6 @@
 package com.nalldev.gombal.data.network
 
+import com.nalldev.gombal.data.network.api.ApiServices
 import com.nalldev.gombal.data.network.model.DataItem
 import com.nalldev.gombal.data.network.model.JobApiResponse
 import io.ktor.client.call.body

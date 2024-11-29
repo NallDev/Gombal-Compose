@@ -3,6 +3,7 @@
     <color name="colorPrimary">#0D988C</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorOnBackground">#182420</color>
+    <color name="colorOnBackgroundNight">#FFFFFF</color>
     <color name="black">#182420</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#EDECEB</color>

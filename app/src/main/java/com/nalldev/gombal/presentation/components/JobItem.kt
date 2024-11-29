@@ -1,5 +1,6 @@
 package com.nalldev.gombal.presentation.components
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,9 +20,9 @@ import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.nalldev.gombal.R
+import com.nalldev.gombal.ui.theme.CustomColorTheme
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -40,18 +42,40 @@ fun JobItem(
     jobTitle: String,
     companyName: String,
     location: String,
-    tags: List<String>
+    tags: List<String>,
+    isDarkMode: Boolean
 ) {
+    val colorPrimary by animateColorAsState(
+        CustomColorTheme.colorPrimary(isDarkMode),
+        label = "primary"
+    )
+    val colorBackground by animateColorAsState(
+        CustomColorTheme.colorBackground(isDarkMode),
+        label = "background"
+    )
+    val colorOnBackground by animateColorAsState(
+        CustomColorTheme.colorOnBackground(isDarkMode),
+        label = "onBackground"
+    )
+    val gray by animateColorAsState(
+        CustomColorTheme.gray(isDarkMode),
+        label = "gray"
+    )
+    val subtitle by animateColorAsState(
+        CustomColorTheme.subtitle(isDarkMode),
+        label = "subtitle"
+    )
+
     Column(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .background(
-                color = colorResource(R.color.colorBackground), shape = RoundedCornerShape(12.dp)
+                color = colorBackground, shape = RoundedCornerShape(12.dp)
             )
             .border(
                 width = 1.dp,
-                color = colorResource(R.color.gray),
+                color = gray,
                 shape = RoundedCornerShape(12.dp)
             )
             .clickable(onClick = onContainerClick)
@@ -86,19 +110,19 @@ fun JobItem(
                     text = jobTitle,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
-                    color = colorResource(R.color.colorOnBackground),
+                    color = colorOnBackground,
                 )
                 Text(
                     text = companyName,
                     fontSize = 12.sp,
-                    color = colorResource(R.color.subtitle),
+                    color = subtitle,
                 )
             }
 
             Icon(
                 painter = painterResource(if (isBookmarked) R.drawable.ic_bookmarked_filled else R.drawable.ic_bookmarked),
                 contentDescription = null,
-                tint = colorResource(R.color.colorPrimary),
+                tint = colorPrimary,
                 modifier = Modifier
                     .size(24.dp)
                     .padding(top = 4.dp)
@@ -120,7 +144,7 @@ fun JobItem(
                         modifier = Modifier
                             .wrapContentSize()
                             .background(
-                                color = colorResource(R.color.colorPrimary),
+                                color = colorPrimary,
                                 shape = RoundedCornerShape(8.dp)
                             )
                             .padding(8.dp),
@@ -134,7 +158,8 @@ fun JobItem(
         TextWithIcon(
             modifier = modifier.fillMaxWidth(),
             imageVector = Icons.Outlined.LocationOn,
-            text = location
+            text = location,
+            isDarkMode = isDarkMode
         )
     }
 }
@@ -149,6 +174,7 @@ private fun JobItemPreview() {
         jobTitle = "Android Developer",
         companyName = "NallDev.Inc",
         location = "Bandung",
-        tags = listOf("Remote", "Mobile Developer")
+        tags = listOf("Remote", "Mobile Developer"),
+        isDarkMode = false
     )
 }

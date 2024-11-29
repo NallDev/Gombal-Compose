@@ -15,12 +15,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.nalldev.gombal.R
+import com.nalldev.gombal.ui.theme.CustomColorTheme
 
 @Composable
-fun IndicatorOnBoarding(modifier: Modifier = Modifier, page: Int) {
+fun IndicatorOnBoarding(modifier: Modifier = Modifier, page: Int, isDarkMode: Boolean) {
     val transition = updateTransition(targetState = page, label = "IndicatorOnBoarding")
     val activeWidth = 64.dp
     val inactiveWidth = 40.dp
@@ -52,9 +51,7 @@ fun IndicatorOnBoarding(modifier: Modifier = Modifier, page: Int) {
                     .height(8.dp)
                     .padding(horizontal = 2.dp)
                     .background(
-                        color = if (currentIndex == page) colorResource(R.color.colorPrimary) else colorResource(
-                            R.color.gray
-                        ),
+                        color = if (currentIndex == page) CustomColorTheme.colorPrimary(isDarkMode) else CustomColorTheme.gray(isDarkMode),
                         shape = RoundedCornerShape(50)
                     )
             )

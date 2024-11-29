@@ -6,14 +6,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.nalldev.gombal.R
+import com.nalldev.gombal.ui.theme.CustomColorTheme
 import kotlinx.coroutines.delay
 
 @Composable
-fun TitleOnBoarding(modifier: Modifier = Modifier, page: Int) {
+fun TitleOnBoarding(modifier: Modifier = Modifier, page: Int, isDarkMode: Boolean) {
     val titles = listOf(
         "Search job easier & more effective",
         "Apply for job anywhere & anytime",
@@ -47,7 +46,7 @@ fun TitleOnBoarding(modifier: Modifier = Modifier, page: Int) {
         text = text.value + if (showCursor.value) "|" else "",
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
-        color = colorResource(R.color.colorOnBackground),
+        color = CustomColorTheme.colorOnBackground(isDarkMode),
         modifier = modifier
     )
 }

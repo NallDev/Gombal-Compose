@@ -15,15 +15,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nalldev.gombal.R
 import com.nalldev.gombal.presentation.screens.onboarding.components.ButtonOnBoarding
 import com.nalldev.gombal.presentation.screens.onboarding.components.ImagesOnBoarding
 import com.nalldev.gombal.presentation.screens.onboarding.components.IndicatorOnBoarding
 import com.nalldev.gombal.presentation.screens.onboarding.components.SubtitleOnBoarding
 import com.nalldev.gombal.presentation.screens.onboarding.components.TitleOnBoarding
+import com.nalldev.gombal.ui.theme.CustomColorTheme
 import kotlinx.coroutines.delay
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -31,7 +30,8 @@ import org.koin.compose.viewmodel.koinViewModel
 fun OnBoardingScreen(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    viewModel: OnBoardingViewModel
+    viewModel: OnBoardingViewModel,
+    isDarkMode: Boolean
 ) {
     val page by viewModel.page.collectAsState()
     val isTransitioning = viewModel.isTransitioning
@@ -54,7 +54,7 @@ fun OnBoardingScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(color = colorResource(R.color.onBoardingBackground))
+            .background(color = CustomColorTheme.onBoardingBackground(isDarkMode))
     ) {
         ImagesOnBoarding(modifier = modifier, page = page)
 
@@ -64,7 +64,7 @@ fun OnBoardingScreen(
                 .height(312.dp)
                 .align(Alignment.BottomCenter)
                 .background(
-                    color = colorResource(R.color.colorBackground),
+                    color = CustomColorTheme.colorBackground(isDarkMode),
                     shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
                 )
                 .padding(24.dp)
@@ -74,23 +74,23 @@ fun OnBoardingScreen(
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.Start
             ) {
-                IndicatorOnBoarding(page = page)
+                IndicatorOnBoarding(page = page, isDarkMode = isDarkMode)
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                TitleOnBoarding(modifier = modifier, page = page)
+                TitleOnBoarding(modifier = modifier, page = page, isDarkMode = isDarkMode)
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Box {
-                    SubtitleOnBoarding(modifier = modifier, page = page)
+                    SubtitleOnBoarding(modifier = modifier, page = page, isDarkMode = isDarkMode)
                 }
             }
 
             ButtonOnBoarding(
                 modifier = modifier.align(Alignment.BottomEnd),
                 page = page,
-                onClick = { if (!isTransitioning) viewModel.nextPage() }
+                onClick = { if (!isTransitioning) viewModel.nextPage() }, isDarkMode = isDarkMode
             )
         }
     }
@@ -99,5 +99,5 @@ fun OnBoardingScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun OnboardingScreenPreview() {
-    OnBoardingScreen(onClick = {}, viewModel = koinViewModel())
+    OnBoardingScreen(onClick = {}, viewModel = koinViewModel(), isDarkMode = false)
 }
